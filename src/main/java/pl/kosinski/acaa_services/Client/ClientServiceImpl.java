@@ -15,6 +15,11 @@ public class ClientServiceImpl implements ClientService {
         return null;
     }
 
+    @Override
+    public Client delete(Long id) {
+        return null;
+    }
+
     private Client toDto(ClientDao clientDao) {
         return null;
     }
