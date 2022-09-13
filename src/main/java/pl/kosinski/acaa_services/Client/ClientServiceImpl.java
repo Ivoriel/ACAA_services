@@ -16,8 +16,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client delete(Long id) {
-        return null;
+    public boolean delete(Long id) {
+        return false;
     }
 
     private Client toDto(ClientDao clientDao) {
