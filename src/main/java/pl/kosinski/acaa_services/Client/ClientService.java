@@ -8,6 +8,6 @@ public interface ClientService {
 
     Client get(Long id);
 
-    Client delete(Long id);
+    boolean delete(Long id);
 
 }
