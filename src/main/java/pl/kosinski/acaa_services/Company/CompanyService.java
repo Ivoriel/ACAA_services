@@ -8,4 +8,6 @@ public interface CompanyService {
 
     Company get(Long id);
 
+    boolean delete(Long id);
+
 }
