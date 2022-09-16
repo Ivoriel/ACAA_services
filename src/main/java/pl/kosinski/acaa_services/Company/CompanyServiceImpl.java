@@ -14,6 +14,11 @@ public class CompanyServiceImpl implements CompanyService {
         return null;
     }
 
+    @Override
+    public boolean delete(Long id) {
+        return false;
+    }
+
     private Company toDto() {
         return null;
     }
