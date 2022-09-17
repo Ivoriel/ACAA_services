@@ -1,5 +1,7 @@
 package pl.kosinski.acaa_services.Company;
 
+import pl.kosinski.acaa_dao.Client.ClientDao;
+import pl.kosinski.acaa_dao.Company.CompanyDao;
 import pl.kosinski.acaa_model.Company.Company;
 
 public class CompanyServiceImpl implements CompanyService {
@@ -19,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService {
         return false;
     }
 
-    private Company toDto() {
+    private Company daoToDto(CompanyDao companyDao) {
         return null;
     }
 }
