@@ -1,9 +1,10 @@
 package pl.kosinski.acaa_services.Company;
 
-import pl.kosinski.acaa_dao.Client.ClientDao;
+import org.springframework.stereotype.Component;
 import pl.kosinski.acaa_dao.Company.CompanyDao;
 import pl.kosinski.acaa_model.Company.Company;
 
+@Component
 public class CompanyServiceImpl implements CompanyService {
 
     @Override
