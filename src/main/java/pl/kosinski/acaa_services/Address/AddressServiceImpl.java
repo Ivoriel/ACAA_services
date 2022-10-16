@@ -12,7 +12,7 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public AddressDto getAddress(long id) {
-        return null;
+        return toDto(addressRepository.getAddress(id));
     }
 
     private AddressDto toDto(AddressDao addressDao) {
