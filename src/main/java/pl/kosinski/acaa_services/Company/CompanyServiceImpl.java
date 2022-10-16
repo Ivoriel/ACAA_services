@@ -8,7 +8,7 @@ import pl.kosinski.acaa_model.Company.Company;
 public class CompanyServiceImpl implements CompanyService {
 
     @Override
-    public Company save(Company company) {
+    public Company save(CompanyDao companyDao) {
         return null;
     }
 
@@ -22,7 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
         return false;
     }
 
-    private Company daoToDto(CompanyDao companyDao) {
+    private Company toDto(CompanyDao companyDao) {
         return null;
     }
 }
