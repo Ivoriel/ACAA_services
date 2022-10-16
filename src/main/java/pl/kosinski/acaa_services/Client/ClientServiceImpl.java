@@ -8,7 +8,7 @@ import pl.kosinski.acaa_model.Client.Client;
 public class ClientServiceImpl implements ClientService {
 
     @Override
-    public Client save(Client client) {
+    public Client save(ClientDao clientDao) {
         return null;
     }
 
