@@ -11,6 +11,14 @@ public class AddressServiceImpl implements AddressService{
     AddressRepository addressRepository;
 
     @Override
+    public AddressDto saveAddress(AddressDto addressDto) {
+        AddressDao addressDao = new AddressDao(addressDto.getId(), addressDto.getCountry(), addressDto.getMunicipality(),
+                addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(), addressDto.getBuildingNumber(),
+                addressDto.getAdditionalIdentifier());
+        return addressDto;
+    }
+
+    @Override
     public AddressDto getAddress(long id) {
         return toDto(addressRepository.getAddress(id));
     }
