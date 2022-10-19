@@ -23,6 +23,11 @@ public class AddressServiceImpl implements AddressService{
         return toDto(addressRepository.getAddress(id));
     }
 
+    @Override
+    public void deleteAddress(long id) {
+        addressRepository.deleteAddress(id);
+    }
+
     private AddressDto toDto(AddressDao addressDao) {
         AddressDto addressDto = new AddressDto();
         addressDto.setId(addressDao.getId());
