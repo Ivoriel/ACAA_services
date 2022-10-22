@@ -5,6 +5,8 @@ import pl.kosinski.acaa_dao.Address.AddressDao;
 import pl.kosinski.acaa_dao.Address.AddressRepository;
 import pl.kosinski.acaa_dto.AddressDto;
 
+import java.util.Optional;
+
 @Component
 public class AddressServiceImpl implements AddressService{
 
@@ -20,7 +22,12 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public AddressDto getAddress(long id) {
-        return toDto(addressRepository.getAddress(id));
+        AddressDto addressDto = new AddressDto();
+        Optional<AddressDao> addressDaoOptional = addressRepository.getAddress(id);
+        if (Optional.ofNullable(addressDaoOptional).isPresent()) {
+            addressDto = toDto(addressDaoOptional.get());
+        }
+        return addressDto;
     }
 
     @Override
