@@ -13,7 +13,7 @@ public class AddressServiceImpl implements AddressService{
     AddressRepository addressRepository;
 
     @Override
-    public AddressDto saveAddress(AddressDto addressDto) {
+    public AddressDto save(AddressDto addressDto) {
         AddressDao addressDao = new AddressDao(addressDto.getId(), addressDto.getCountry(), addressDto.getMunicipality(),
                 addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(), addressDto.getBuildingNumber(),
                 addressDto.getAdditionalIdentifier());
@@ -21,7 +21,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public AddressDto getAddress(long id) {
+    public AddressDto get(long id) {
         AddressDto addressDto = new AddressDto();
         Optional<AddressDao> addressDaoOptional = addressRepository.getAddress(id);
         if (Optional.ofNullable(addressDaoOptional).isPresent()) {
@@ -31,7 +31,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public void deleteAddress(long id) {
+    public void delete(long id) {
         addressRepository.deleteAddress(id);
     }
 
