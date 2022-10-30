@@ -4,10 +4,10 @@ import pl.kosinski.acaa_dto.AddressDto;
 
 public interface AddressService {
 
-    AddressDto saveAddress(AddressDto addressDto);
+    AddressDto save(AddressDto addressDto);
 
-    AddressDto getAddress(long id);
+    AddressDto get(long id);
 
-    void deleteAddress(long id);
+    void delete(long id);
 
 }
