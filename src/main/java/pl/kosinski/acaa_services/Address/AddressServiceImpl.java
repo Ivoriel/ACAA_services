@@ -14,10 +14,16 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public AddressDto save(AddressDto addressDto) {
-        AddressDao addressDao = new AddressDao(addressDto.getId(), addressDto.getCountry(), addressDto.getMunicipality(),
-                addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(), addressDto.getBuildingNumber(),
-                addressDto.getAdditionalIdentifier());
-        return addressDto;
+        Optional<AddressDao> addressDaoOptional = addressRepository.getAddress(addressDto.getId());
+        if (Optional.ofNullable(addressDaoOptional).isPresent()) {
+            return toDto(addressDaoOptional.get().edit(addressDto.getCountry(), addressDto.getMunicipality(),
+                    addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
+                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+        } else {
+            return toDto(new AddressDao(addressRepository.size(), addressDto.getCountry(), addressDto.getMunicipality(),
+                    addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
+                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+        }
     }
 
     @Override
