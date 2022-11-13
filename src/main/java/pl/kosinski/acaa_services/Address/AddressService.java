@@ -10,4 +10,6 @@ public interface AddressService {
 
     void delete(long id);
 
+    AddressDto generate();
+
 }
