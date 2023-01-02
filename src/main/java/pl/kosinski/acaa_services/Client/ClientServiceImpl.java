@@ -2,10 +2,13 @@ package pl.kosinski.acaa_services.Client;
 
 import org.springframework.stereotype.Component;
 import pl.kosinski.acaa_dao.Client.ClientDao;
+import pl.kosinski.acaa_dao.Client.ClientRepository;
 import pl.kosinski.acaa_model.Client.Client;
 
 @Component
 public class ClientServiceImpl implements ClientService {
+
+    ClientRepository clientRepository;
 
     @Override
     public Client save(ClientDao clientDao) {
