@@ -1,9 +1,13 @@
 package pl.kosinski.acaa_services.Client;
 
 import org.springframework.stereotype.Component;
+import pl.kosinski.acaa_dao.Address.AddressDao;
 import pl.kosinski.acaa_dao.Client.ClientDao;
 import pl.kosinski.acaa_dao.Client.ClientRepository;
+import pl.kosinski.acaa_dto.ClientDto;
 import pl.kosinski.acaa_model.Client.Client;
+
+import java.util.Optional;
 
 @Component
 public class ClientServiceImpl implements ClientService {
@@ -17,7 +21,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client get(Long id) {
-        return null;
+        ClientDto dto = new ClientDto();
+        Optional<ClientDao> daoOptional = clientRepository.get(id);
+        if (Optional.ofNullable(daoOptional).isPresent()) {
+            dto = toDto(daoOptional.get());
+        }
+        return dto;
     }
 
     @Override
