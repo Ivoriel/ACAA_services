@@ -34,8 +34,12 @@ public class ClientServiceImpl implements ClientService {
         return false;
     }
 
-    private Client toDto(ClientDao clientDao) {
-        return null;
+    private ClientDto toDto(ClientDao clientDao) {
+        ClientDto dto = new ClientDto();
+        dto.setId(clientDao.getId());
+        dto.setName(clientDao.getName());
+        dto.setAddress(clientDao.getAddressId());
+        return dto;
     }
 
 }
