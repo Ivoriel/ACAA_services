@@ -15,12 +15,12 @@ public class ClientServiceImpl implements ClientService {
     ClientRepository clientRepository;
 
     @Override
-    public Client save(ClientDao clientDao) {
+    public ClientDto save(ClientDao clientDao) {
         return null;
     }
 
     @Override
-    public Client get(Long id) {
+    public ClientDto get(Long id) {
         ClientDto dto = new ClientDto();
         Optional<ClientDao> daoOptional = clientRepository.get(id);
         if (Optional.ofNullable(daoOptional).isPresent()) {
