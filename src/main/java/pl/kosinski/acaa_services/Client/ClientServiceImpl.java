@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.kosinski.acaa_dao.Client.ClientDao;
 import pl.kosinski.acaa_dao.Client.ClientRepository;
 import pl.kosinski.acaa_dto.ClientDto;
+import pl.kosinski.acaa_services.Address.AddressService;
 
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService {
 
     ClientRepository clientRepository;
+    AddressService addressService;
 
     @Override
     public ClientDto save(ClientDao clientDao) {
@@ -36,7 +38,7 @@ public class ClientServiceImpl implements ClientService {
         ClientDto dto = new ClientDto();
         dto.setId(clientDao.getId());
         dto.setName(clientDao.getName());
-        dto.setAddress(clientDao.getAddressId());
+        dto.setAddress(addressService.get(clientDao.getAddressId()));
         return dto;
     }
 
