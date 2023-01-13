@@ -1,6 +1,7 @@
 package pl.kosinski.acaa_services.Client;
 
 import org.springframework.stereotype.Component;
+import pl.kosinski.acaa_dao.Address.AddressDao;
 import pl.kosinski.acaa_dao.Client.ClientDao;
 import pl.kosinski.acaa_dao.Client.ClientRepository;
 import pl.kosinski.acaa_dto.ClientDto;
@@ -16,7 +17,16 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto save(ClientDao clientDao) {
-        return null;
+        Optional<ClientDao> addressDaoOptional = clientRepository.get(clientDao.getId());
+        if (Optional.ofNullable(addressDaoOptional).isPresent()) {
+            return toDto(addressDaoOptional.get().edit(clientDao.getCountry(), addressDto.getMunicipality(),
+                    addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
+                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+        } else {
+            return toDto(new AddressDao(addressRepository.size(), addressDto.getCountry(), addressDto.getMunicipality(),
+                    addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
+                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+        }
     }
 
     @Override
