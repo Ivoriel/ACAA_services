@@ -40,8 +40,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean delete(Long id) {
-        return false;
+    public void delete(Long id) {
+        clientRepository.delete(id);
     }
 
     private ClientDto toDto(ClientDao clientDao) {
