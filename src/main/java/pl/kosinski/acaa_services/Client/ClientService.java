@@ -10,6 +10,6 @@ public interface ClientService {
 
     ClientDto get(Long id);
 
-    boolean delete(Long id);
+    void delete(Long id);
 
 }
