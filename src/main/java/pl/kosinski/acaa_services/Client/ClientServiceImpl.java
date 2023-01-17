@@ -19,13 +19,9 @@ public class ClientServiceImpl implements ClientService {
     public ClientDto save(ClientDao clientDao) {
         Optional<ClientDao> addressDaoOptional = clientRepository.get(clientDao.getId());
         if (Optional.ofNullable(addressDaoOptional).isPresent()) {
-            return toDto(addressDaoOptional.get().edit(clientDao.getCountry(), addressDto.getMunicipality(),
-                    addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
-                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+            return toDto(addressDaoOptional.get().edit(clientDao.getName(), clientDao.getAddressId()));
         } else {
-            return toDto(new AddressDao(addressRepository.size(), addressDto.getCountry(), addressDto.getMunicipality(),
-                    addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
-                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+            return toDto(new ClientDao(clientRepository.size(), clientDao.getName(), clientDao.getAddressId()));
         }
     }
 
