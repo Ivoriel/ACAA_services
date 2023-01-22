@@ -26,8 +26,8 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyDto dto = new CompanyDto();
         dto.setId(companyDao.getId());
         dto.setName(companyDao.getName());
-        dto.setClient(companyDao.getClient());
-        dto.setAddress(companyDao.getAddressId());
+        dto.setClientId(companyDao.getClient());
+        dto.setAddressId(companyDao.getAddressId());
         return dto;
     }
 }
