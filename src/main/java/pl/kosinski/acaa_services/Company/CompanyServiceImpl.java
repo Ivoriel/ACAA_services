@@ -23,6 +23,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     private CompanyDto toDto(CompanyDao companyDao) {
-        return null;
+        CompanyDto dto = new CompanyDto();
+        dto.setId(companyDao.getId());
+        dto.setName(companyDao.getName());
+        dto.setClient(companyDao.getClient());
+        dto.setAddress(companyDao.getAddressId());
+        return dto;
     }
 }
