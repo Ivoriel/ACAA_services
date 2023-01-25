@@ -2,10 +2,13 @@ package pl.kosinski.acaa_services.Company;
 
 import org.springframework.stereotype.Component;
 import pl.kosinski.acaa_dao.Company.CompanyDao;
+import pl.kosinski.acaa_dao.Company.CompanyRepository;
 import pl.kosinski.acaa_dto.CompanyDto;
 
 @Component
 public class CompanyServiceImpl implements CompanyService {
+
+    CompanyRepository repository;
 
     @Override
     public CompanyDto save(CompanyDao companyDao) {
