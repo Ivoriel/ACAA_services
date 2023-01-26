@@ -1,9 +1,12 @@
 package pl.kosinski.acaa_services.Company;
 
 import org.springframework.stereotype.Component;
+import pl.kosinski.acaa_dao.Client.ClientDao;
 import pl.kosinski.acaa_dao.Company.CompanyDao;
 import pl.kosinski.acaa_dao.Company.CompanyRepository;
 import pl.kosinski.acaa_dto.CompanyDto;
+
+import java.util.Optional;
 
 @Component
 public class CompanyServiceImpl implements CompanyService {
@@ -12,7 +15,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto save(CompanyDao companyDao) {
-        return null;
+        Optional<ClientDao> addressDaoOptional = clientRepository.get(clientDao.getId());
+        if (Optional.ofNullable(addressDaoOptional).isPresent()) {
+            return toDto(addressDaoOptional.get().edit(clientDao.getName(), clientDao.getAddressId()));
+        } else {
+            return toDto(new ClientDao(clientRepository.size(), clientDao.getName(), clientDao.getAddressId()));
+        }
     }
 
     @Override
