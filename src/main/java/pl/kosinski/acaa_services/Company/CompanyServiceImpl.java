@@ -1,5 +1,6 @@
 package pl.kosinski.acaa_services.Company;
 
+import lombok.var;
 import org.springframework.stereotype.Component;
 import pl.kosinski.acaa_dao.Company.CompanyDao;
 import pl.kosinski.acaa_dao.Company.CompanyRepository;
@@ -13,14 +14,17 @@ public class CompanyServiceImpl implements CompanyService {
     CompanyRepository repository;
 
     @Override
-    public CompanyDto save(CompanyDao companyDao) {
-        Optional<CompanyDao> addressDaoOptional = repository.get(companyDao.getId());
-        if (Optional.ofNullable(addressDaoOptional).isPresent()) {
-            return toDto(addressDaoOptional.get().edit(companyDao.getName(), companyDao.getClientId(),
-                    companyDao.getAddressId()));
+    public CompanyDto save(CompanyDto companyDto) {
+        Optional<CompanyDao> companyDaoOptional = repository.get(companyDto.getId());
+        if (Optional.ofNullable(companyDaoOptional).isPresent()) {
+            var companyDao = companyDaoOptional.get();
+            companyDao.edit(companyDto.getName(), companyDto.getClientId(),
+                    companyDto.getAddressId());
+            return toDto(repository.save(companyDao));
         } else {
-            return toDto(new CompanyDao(repository.size(), companyDao.getName(), companyDao.getClientId(),
-                    companyDao.getAddressId()));
+            var companyDao = new CompanyDao(repository.size(), companyDto.getName(), companyDto.getClientId(),
+                    companyDto.getAddressId());
+            return toDto(repository.save(companyDao));
         }
     }
 
