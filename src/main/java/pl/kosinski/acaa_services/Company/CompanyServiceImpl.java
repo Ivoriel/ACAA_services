@@ -30,7 +30,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto get(Long id) {
-        return null;
+        var companyDto = new CompanyDto();
+        var companyDaoOptional = repository.get(id);
+        if (Optional.ofNullable(companyDaoOptional).isPresent()) {
+            companyDto = toDto(companyDaoOptional.get());
+        }
+        return companyDto;
     }
 
     @Override
