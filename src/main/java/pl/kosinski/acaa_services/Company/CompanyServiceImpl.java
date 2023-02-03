@@ -40,7 +40,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return repository.delete(id);
     }
 
     private CompanyDto toDto(CompanyDao companyDao) {
