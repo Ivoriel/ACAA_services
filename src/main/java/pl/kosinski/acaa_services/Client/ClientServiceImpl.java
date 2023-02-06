@@ -1,5 +1,6 @@
 package pl.kosinski.acaa_services.Client;
 
+import lombok.var;
 import org.springframework.stereotype.Component;
 import pl.kosinski.acaa_dao.Client.ClientDao;
 import pl.kosinski.acaa_dao.Client.ClientRepository;
@@ -15,18 +16,21 @@ public class ClientServiceImpl implements ClientService {
     AddressService addressService;
 
     @Override
-    public ClientDto save(ClientDao clientDao) {
-        Optional<ClientDao> clientDaoOptional = clientRepository.get(clientDao.getId());
+    public pl.kosinski.acaa_dto.ClientDto save(ClientDto clientDto) {
+        Optional<ClientDao> clientDaoOptional = clientRepository.get(clientDto.getId());
         if (Optional.ofNullable(clientDaoOptional).isPresent()) {
-            return toDto(clientDaoOptional.get().edit(clientDao.getName(), clientDao.getAddressId()));
+            var clientDao = clientDaoOptional.get();
+            clientDao.edit(clientDto.getName(), clientDto.getAddressId());
+            return toDto(clientRepository.save(clientDao));
         } else {
-            return toDto(new ClientDao(clientRepository.size(), clientDao.getName(), clientDao.getAddressId()));
+            var clientDao = new ClientDao(clientRepository.size(), clientDto.getName(), clientDto.getAddressId());
+            return toDto(clientRepository.save(clientDao));
         }
     }
 
     @Override
-    public ClientDto get(Long id) {
-        ClientDto dto = new ClientDto();
+    public pl.kosinski.acaa_dto.ClientDto get(Long id) {
+        pl.kosinski.acaa_dto.ClientDto dto = new pl.kosinski.acaa_dto.ClientDto();
         Optional<ClientDao> daoOptional = clientRepository.get(id);
         if (Optional.ofNullable(daoOptional).isPresent()) {
             dto = toDto(daoOptional.get());
@@ -39,11 +43,11 @@ public class ClientServiceImpl implements ClientService {
         clientRepository.delete(id);
     }
 
-    private ClientDto toDto(ClientDao clientDao) {
-        ClientDto dto = new ClientDto();
+    private pl.kosinski.acaa_dto.ClientDto toDto(ClientDao clientDao) {
+        pl.kosinski.acaa_dto.ClientDto dto = new pl.kosinski.acaa_dto.ClientDto();
         dto.setId(clientDao.getId());
         dto.setName(clientDao.getName());
-        dto.setAddress(addressService.get(clientDao.getAddressId()));
+        dto.setAddressId(clientDao.getAddressId());
         return dto;
     }
 
