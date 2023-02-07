@@ -1,5 +1,6 @@
 package pl.kosinski.acaa_services.Address;
 
+import lombok.var;
 import org.springframework.stereotype.Component;
 import pl.kosinski.acaa_dao.Address.AddressDao;
 import pl.kosinski.acaa_dao.Address.AddressRepository;
@@ -16,13 +17,16 @@ public class AddressServiceImpl implements AddressService{
     public AddressDto save(AddressDto addressDto) {
         Optional<AddressDao> addressDaoOptional = addressRepository.get(addressDto.getId());
         if (Optional.ofNullable(addressDaoOptional).isPresent()) {
-            return toDto(addressDaoOptional.get().edit(addressDto.getCountry(), addressDto.getMunicipality(),
-                    addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
-                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+            var addressDao = addressDaoOptional.get();
+            addressDao.edit(addressDto.getCountry(),
+                    addressDto.getMunicipality(), addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
+                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier());
+            return toDto(addressRepository.save(addressDao));
         } else {
-            return toDto(new AddressDao(addressRepository.size(), addressDto.getCountry(), addressDto.getMunicipality(),
+            var addressDao = new AddressDao(addressRepository.size(), addressDto.getCountry(), addressDto.getMunicipality(),
                     addressDto.getRegion(), addressDto.getZipCode(), addressDto.getStreet(),
-                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier()));
+                    addressDto.getBuildingNumber(), addressDto.getAdditionalIdentifier());
+            return toDto(addressRepository.save(addressDao));
         }
     }
 
